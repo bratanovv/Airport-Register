@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > SecurityConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.airport.configurations</a>
+</div>
+
+<h1>Coverage Summary for Class: SecurityConfig (com.example.airport.configurations)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SecurityConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SecurityConfig$$EnhancerBySpringCGLIB$$2fa48e92</td>
+  </tr>
+  <tr>
+    <td class="name">SecurityConfig$$EnhancerBySpringCGLIB$$2fa48e92$$FastClassBySpringCGLIB$$1dca8f87</td>
+  </tr>
+  <tr>
+    <td class="name">SecurityConfig$$EnhancerBySpringCGLIB$$3a6dcac8</td>
+  </tr>
+  <tr>
+    <td class="name">SecurityConfig$$EnhancerBySpringCGLIB$$3a6dcac8$$FastClassBySpringCGLIB$$36841ba9</td>
+  </tr>
+  <tr>
+    <td class="name">SecurityConfig$$FastClassBySpringCGLIB$$4a2a1d7f</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.airport.configurations;
+&nbsp;
+&nbsp;import com.example.airport.services.CustomUserDetailsService;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import org.springframework.boot.autoconfigure.graphql.security.GraphQlWebFluxSecurityAutoConfiguration;
+&nbsp;import org.springframework.context.annotation.Bean;
+&nbsp;import org.springframework.security.authentication.AuthenticationManager;
+&nbsp;import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+&nbsp;import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+&nbsp;import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
+&nbsp;import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+&nbsp;import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+&nbsp;import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+&nbsp;import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+&nbsp;import org.springframework.security.config.ldap.EmbeddedLdapServerContextSourceFactoryBean;
+&nbsp;import org.springframework.security.config.ldap.LdapBindAuthenticationManagerFactory;
+&nbsp;import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+&nbsp;import org.springframework.security.crypto.password.PasswordEncoder;
+&nbsp;
+&nbsp;
+&nbsp;@EnableWebSecurity
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+&nbsp;@EnableGlobalMethodSecurity(prePostEnabled = true)
+&nbsp;public class SecurityConfig extends WebSecurityConfigurerAdapter {
+&nbsp;    private final CustomUserDetailsService userDetailsService;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void configure(HttpSecurity http) throws Exception {
+<b class="fc">&nbsp;        http</b>
+<b class="fc">&nbsp;                .authorizeRequests()</b>
+<b class="fc">&nbsp;                .antMatchers(&quot;/&quot;, &quot;/flight/*&quot;, &quot;/registration&quot;, &quot;static/**&quot;,&quot;/search/**&quot;)</b>
+<b class="fc">&nbsp;                .permitAll()</b>
+<b class="fc">&nbsp;                .anyRequest().authenticated()</b>
+<b class="fc">&nbsp;                .and()</b>
+<b class="fc">&nbsp;                .formLogin()</b>
+<b class="fc">&nbsp;                .loginPage(&quot;/login&quot;)</b>
+<b class="fc">&nbsp;                .permitAll()</b>
+<b class="fc">&nbsp;                .defaultSuccessUrl(&quot;/&quot;,true)</b>
+<b class="fc">&nbsp;                .and()</b>
+<b class="fc">&nbsp;                .logout()</b>
+<b class="fc">&nbsp;                .permitAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+<b class="fc">&nbsp;        auth.userDetailsService(userDetailsService)</b>
+<b class="fc">&nbsp;                .passwordEncoder(passwordEncoder());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Bean
+&nbsp;    public PasswordEncoder passwordEncoder() {
+<b class="fc">&nbsp;        return new BCryptPasswordEncoder(8);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-10 10:27</div>
+</div>
+</body>
+</html>
